@@ -2,7 +2,9 @@
 
 #DEV='enx0022cfedac8e'
 #DEV='enp7s0'
-DEV='enp7s0.146'
+#DEV='enp7s0.146'
+DEV='eth0'
+#DEV='eth1.146'
 
 sudo /sbin/tc qdisc add dev $DEV root handle 1: hfsc default 20
 sudo /sbin/tc class add dev $DEV parent 1: classid 1:1 hfsc sc m2 90mbit ul m2 90mbit
