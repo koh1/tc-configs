@@ -15,8 +15,8 @@ if [ "$2" = "hfsc" ] ; then
     #    sudo /sbin/tc class add dev $DEV parent 1:1 classid 1:10 hfsc sc m1 10mbit d 5ms m2 90mbit
     #sudo /sbin/tc class add dev $DEV parent 1:1 classid 1:20 hfsc ls m2 80mbit ul m2 90mbit
     #sudo /sbin/tc class add dev $DEV parent 1:1 classid 1:10 hfsc rt m1 10mbit d 1ms m2 90mbit
-    sudo /sbin/tc class add dev $DEV parent 1:1 classid 1:20 hfsc sc m2 80mbit ul m2 90mbit
-    sudo /sbin/tc class add dev $DEV parent 1:1 classid 1:10 hfsc rt m1 10mbit d 1ms m2 90mbit
+    sudo /sbin/tc class add dev $DEV parent 1:1 classid 1:20 hfsc sc m2 85mbit ul m2 90mbit
+    sudo /sbin/tc class add dev $DEV parent 1:1 classid 1:10 hfsc rt m1 5mbit d 1ms m2 90mbit
 
     # 10 users sends 1 full size frame every 10ms.
 #    sudo /sbin/tc class add dev $DEV parent 1:10 classid 1:11 hfsc sc m1 5mbit d 10ms m2 10mbit    
@@ -27,8 +27,8 @@ if [ "$2" = "hfsc" ] ; then
 elif [ "$2" = "hfsc1g" ] ; then
     sudo /sbin/tc qdisc add dev $DEV root handle 1: hfsc default 20
     sudo /sbin/tc class add dev $DEV parent 1: classid 1:1 hfsc sc rate 1000mbit ul rate 1000mbit    
-    sudo /sbin/tc class add dev $DEV parent 1:1 classid 1:20 hfsc sc m2 990mbit ul m2 1000mbit
-    sudo /sbin/tc class add dev $DEV parent 1:1 classid 1:10 hfsc rt m1 10mbit d 1ms m2 1000mbit
+    sudo /sbin/tc class add dev $DEV parent 1:1 classid 1:20 hfsc sc m2 995mbit ul m2 1000mbit
+    sudo /sbin/tc class add dev $DEV parent 1:1 classid 1:10 hfsc rt m1 5mbit d 1ms m2 1000mbit
     sudo /sbin/tc filter add dev $DEV protocol ip parent 1: prio 1 handle 1 fw flowid 1:10
 
 elif [ "$2" = "pfifo" ] ; then
