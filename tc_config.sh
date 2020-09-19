@@ -62,6 +62,14 @@ elif [ "$2" = "htbfqcodel100m" ] ; then
     sudo /sbin/tc class add dev $DEV parent 1: classid 1:1 htb rate 100Mbit ceil 100Mbit
     sudo /sbin/tc qdisc add dev $DEV parent 1:1 fq_codel 
 
+elif [ "$2" = "htbfqcodel100mwd" ] ; then
+
+    sudo /sbin/tc qdisc add dev $DEV root handle 1: htb default 1
+    sudo /sbin/tc class add dev $DEV parent 1: classid 1:1 htb rate 100Mbit ceil 100Mbit
+    sudo /sbin/tc qdisc add dev $DEV parent 1:1 handle 10: fq_codel
+    sudo /sbin/tc qdisc add dev $DEV parent 10: netem delay 20ms
+    
+
 elif [ "$2" = "htbfqcodel1g" ] ; then
     sudo /sbin/tc qdisc add dev $DEV root handle 1: htb default 1
     sudo /sbin/tc class add dev $DEV parent 1: classid 1:1 htb rate 1000Mbit ceil 1000Mbit
